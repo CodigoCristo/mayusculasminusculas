@@ -1,1 +1,1 @@
-![demo]([http://lmsotfy.com/so.png](https://github.com/CodigoCristo/mayusculasminusculas/blob/main/captura.png?raw=true))
+![demo](https://raw.githubusercontent.com/CodigoCristo/mayusculasminusculas/refs/heads/main/captura.png)
