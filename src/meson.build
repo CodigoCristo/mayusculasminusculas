@@ -9,10 +9,14 @@ sources = files(
 )
 
 app = executable(
-    output,
+    meson.project_name(),
     
     resources,
     sources,
     dependencies: deps,
     install: true,
 )
+
+
+
+

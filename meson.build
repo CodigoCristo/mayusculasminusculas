@@ -2,7 +2,7 @@
 # https://github.com/SpikedPaladin/ValaGtkTemplate/tree/main
 
 project(
-    'Example',
+    'org.gtk.MayusApp',
     'c',
     version: '1.0',
     meson_version: '>= 0.60',
@@ -21,3 +21,5 @@ output = name.to_lower()
 
 subdir('data')
 subdir('src')
+
+

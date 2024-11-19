@@ -159,7 +159,7 @@ show_toast (AdwToastOverlay *overlay)
 
 static void activate(GtkApplication *app, gpointer user_data) {
     // Usa GtkBuilder para cargar la interfaz desde el recurso empaquetado
-    GtkBuilder *builder = gtk_builder_new_from_resource("/org/gtk/Example/window.ui");
+    GtkBuilder *builder = gtk_builder_new_from_resource("/org/gtk/MayusApp/window.ui");
     GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(builder, "window"));
     //AdwToastOverlay
     GtkWidget *toolbar_view = GTK_WIDGET(gtk_builder_get_object(builder, "toolbar_view"));
@@ -167,7 +167,7 @@ static void activate(GtkApplication *app, gpointer user_data) {
     GtkWidget *adwstatus = GTK_WIDGET(gtk_builder_get_object(builder, "adwstatus"));
 
     
-    GtkBuilder *boxview = gtk_builder_new_from_resource("/org/gtk/Example/texview.ui");
+    GtkBuilder *boxview = gtk_builder_new_from_resource("/org/gtk/MayusApp/texview.ui");
     GtkWidget *box = GTK_WIDGET(gtk_builder_get_object(boxview, "box"));
 
     //adw_toolbar_view_set_content (ADW_TOOLBAR_VIEW (toolbar_view), overlay);
@@ -199,7 +199,7 @@ static void activate(GtkApplication *app, gpointer user_data) {
 }
 
 int main(int argc, char *argv[]) {
-    g_autoptr (AdwApplication) app = adw_application_new("org.gtk.Example", G_APPLICATION_DEFAULT_FLAGS);
+    g_autoptr (AdwApplication) app = adw_application_new("org.gtk.MayusApp", G_APPLICATION_DEFAULT_FLAGS);
     g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
     return g_application_run(G_APPLICATION(app), argc, argv);
 }

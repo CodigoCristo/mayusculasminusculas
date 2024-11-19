@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+
+Name=MayusApp
+GenericName=Text Capitalization Tool
+Comment=A simple tool to capitalize every word in your text.
+Categories=Utility;TextEditor;
+
+Icon=org.gtk.MayusApp
+Exec=org.gtk.MayusApp
+
+Terminal=false

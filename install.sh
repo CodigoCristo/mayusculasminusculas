@@ -2,4 +2,7 @@
 meson setup build 
 meson setup build --reconfigure
 meson compile -C build
-./build/src/example
+meson install -C build
+org.gtk.MayusApp
+
+#./build/src/example
