@@ -39,10 +39,6 @@ fácilmente convertir o pasar de &lt;b&gt;MAYÚSCULAS a minúsculas&lt;/b&gt;</p
   <menu id="menu_app">
     <section>
       <item>
-        <attribute name="label" translatable="true">Keyboard Shortcuts</attribute>
-        <attribute name="action">app.shortcuts</attribute>
-      </item>
-      <item>
         <attribute name="label" translatable="true">About My App</attribute>
         <attribute name="action">app.about</attribute>
       </item>

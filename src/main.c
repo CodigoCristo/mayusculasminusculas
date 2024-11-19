@@ -157,6 +157,31 @@ show_toast (AdwToastOverlay *overlay)
   adw_toast_overlay_add_toast (overlay, toast);
 }
 
+
+// Función para la acción "About"
+static void
+about_action (GSimpleAction *action, GVariant *parameter, gpointer app)
+{
+  const char *developers[] = {
+    "Codigo Cristo",
+    NULL
+  };
+
+  // Mostrar el diálogo "Acerca de"
+  adw_show_about_dialog (GTK_WIDGET (gtk_application_get_active_window (app)),
+                         "application-name", "MayusApp",
+                         "application-icon", "preferences-desktop-keyboard",
+                         "version", "1.0.0",
+                         "copyright", "© 2024 MayusApp",
+                         "issue-url", "https://github.com/CodigoCristo/mayusculasminusculas",
+                         "license-type", GTK_LICENSE_MIT_X11,
+                         "developers", developers,
+                         "translator-credits", ("translator-credits"),
+                         NULL);
+
+}
+
+
 static void activate(GtkApplication *app, gpointer user_data) {
     // Usa GtkBuilder para cargar la interfaz desde el recurso empaquetado
     GtkBuilder *builder = gtk_builder_new_from_resource("/org/gtk/MayusApp/window.ui");
@@ -182,7 +207,24 @@ static void activate(GtkApplication *app, gpointer user_data) {
     GtkButton *button_mayus_despues_punto = GTK_BUTTON(gtk_builder_get_object(boxview, "mayus_despues_punto"));
     GtkButton *capi_text = GTK_BUTTON(gtk_builder_get_object(boxview, "capi_text"));
     GtkButton *copiar_texto = GTK_BUTTON(gtk_builder_get_object(boxview, "copiar_texto"));
-    
+   
+
+    GtkMenuButton *button_menu = GTK_MENU_BUTTON(gtk_builder_get_object(builder, "button_menu"));
+    // Crear un modelo para el menú
+    GMenu *menu_app = g_menu_new ();
+
+    // Agregar elementos al menú
+    GMenu *section = g_menu_new ();
+    g_menu_append (section, "About My App", "app.about");
+    g_menu_append_section (menu_app, NULL, G_MENU_MODEL (section));
+
+    // Configurar el menú en el botón de menú
+    gtk_menu_button_set_menu_model (GTK_MENU_BUTTON (button_menu), G_MENU_MODEL (menu_app));
+
+    // Liberar el modelo después de configurarlo
+    g_object_unref (menu_app);
+
+
 
     // Conectar las señales
     g_signal_connect(button_mayus, "clicked", G_CALLBACK(on_mayus_button_clicked), textview);
@@ -199,7 +241,17 @@ static void activate(GtkApplication *app, gpointer user_data) {
 }
 
 int main(int argc, char *argv[]) {
-    g_autoptr (AdwApplication) app = adw_application_new("org.gtk.MayusApp", G_APPLICATION_DEFAULT_FLAGS);
+    g_autoptr (AdwApplication) app = adw_application_new("org.gtk.MayusApp", 0);
+
+        // Crear acciones para el menú
+    const GActionEntry app_entries[] = {
+        { "about", about_action, NULL, NULL, NULL },
+    };
+
+    // Añadir las acciones a la aplicación
+    g_action_map_add_action_entries (G_ACTION_MAP (app), app_entries, G_N_ELEMENTS (app_entries), app);
+
+
     g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
     return g_application_run(G_APPLICATION(app), argc, argv);
 }
